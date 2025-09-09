@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casevo：认知主体与社会演化模拟器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+    <style>
+        /* Tech-Enhanced Palette: Bright, Professional, with a futuristic touch */
+        :root {
+            --primary-blue: #0077ff;
+            --light-blue: #00aaff;
+            --text-primary: #212529;
+            --text-secondary: #5a6470;
+            --bg-light: #ffffff;
+            --bg-off-white: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-secondary);
+        }
+
+        .light-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .main-title {
+            color: var(--text-primary);
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        .card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px -2px rgb(0 0 0 / 0.05);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px -5px rgba(0, 119, 255, 0.15);
+            border-color: rgba(0, 119, 255, 0.3);
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(45deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            border: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.2);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 119, 255, 0.3);
+        }
+
+        .tech-bg {
+             background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+             background-size: 20px 20px;
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            background-color: rgba(0, 119, 255, 0.05);
+        }
+        
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+        .github-link:hover {
+            color: var(--light-blue);
+            transform: translateX(5px);
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Navigation -->
+    <header id="header" class="light-nav fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold main-title">
+                <a href="index_bright.html">rgCASS</a>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-lg">
+                <a href="index_bright.html#research" class="nav-link">研究方向</a>
+                <a href="index_bright.html#cooperation" class="nav-link">业务合作</a>
+                <a href="index_bright.html#team" class="nav-link">团队构成</a>
+                <a href="index_bright.html#recruitment" class="nav-link">联系我们</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index_bright.html#research" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">研究方向</a>
+            <a href="index_bright.html#cooperation" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">业务合作</a>
+            <a href="index_bright.html#team" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">团队构成</a>
+            <a href="index_bright.html#recruitment" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">联系我们</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-white pt-20">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold main-title leading-tight mb-2">Casevo</h1>
+                <p class="text-2xl md:text-3xl section-title mb-6">认知主体与社会演化模拟器</p>
+                <p class="text-xl md:text-2xl mb-8">基于多智能体的社会传播模拟器</p>
+                <a href="https://github.com/rgCASS/casevo" target="_blank" class="github-link text-xl font-bold mb-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    GitHub 开源地址
+                </a>
+                <div class="max-w-3xl mx-auto text-lg text-gray-600">
+                    <p>专为科研设计的开源AI科研助手，其核心是一个多智能体模拟框架，通过集成大语言模型构建具备高级认知能力的智能体，支持从场景设置到复杂社会网络建模的完整仿真框架。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features -->
+        <section id="features" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">核心特点</h2>
+                <p class="text-center text-lg section-title mb-16">用于生成和分析模拟社会行为的生成式研究工具</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold main-title mb-2">LLM驱动的认知智能体</h3>
+                                <p>项目的基石是利用大语言模型作为模拟中每个智能体的"大脑"。这使得智能体能够进行推理、理解语境并生成复杂的行为，超越了传统基于简单规则的智能体。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold main-title mb-2">动态社会建模</h3>
+                                <p>该框架专为模拟动态社会过程而设计，能够有效支持社会网络分析、舆情动态演化、复杂社会系统中的行为预测等多种研究场景。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold main-title mb-2">高保真度与灵活性</h3>
+                                <p>通过引入具备高级认知能力的智能体，Casevo显著提升了模拟的真实性和灵活性，能够促成"更真实和灵活的智能体互动"。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold main-title mb-2">可扩展与可定制的框架</h3>
+                                <p>Casevo基于成熟的Python库Mesa构建，继承了其模块化和灵活性。研究人员可以高度定制智能体的角色、行为、记忆以及整个模拟环境，以适应广泛的研究问题。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Functions -->
+        <section id="functions" class="py-20 lg:py-32 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">主要功能</h2>
+                <p class="text-center text-lg section-title mb-16">全方位支持社会模拟研究</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-8">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">社会交互模拟</h3>
+                        <p class="text-center">模拟复杂的社会交互过程，如选举辩论、公共舆论传播等，再现个体之间的互动和信息交流。</p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">动态社会网络建模</h3>
+                        <p class="text-center">支持构建和动态调整社会网络结构，反映个体关系的演变，适用于信息传播、社交影响等研究场景。</p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">个体行为与决策模拟</h3>
+                        <p class="text-center">基于链式思维（CoT）和检索增强生成（RAG）等机制，代理能进行多步推理和基于历史记忆的决策，模拟个体在复杂情境下的行为选择。</p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">大规模并行处理</h3>
+                        <p class="text-center">具备并行优化模块，高效处理大规模代理的并行行为和决策，提高模拟的效率和性能。</p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">灵活的场景定制</h3>
+                        <p class="text-center">用户根据需求定制模拟场景，包括代理的个性设置、网络拓扑结构和外部事件干预等，适应多样化的研究需求。</p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 12 12 8 8 12"></polyline><line x1="12" y1="16" x2="12" y2="8"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">丰富的结果分析</h3>
+                        <p class="text-center">模拟结果以结构化数据格式输出，包括agent_id.json、event.json和model.json等文件，为研究者提供丰富的分析数据。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Principles -->
+        <section id="principles" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">技术原理</h2>
+                <p class="text-center text-lg section-title mb-16">深入了解Casevo的核心技术架构</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-2xl font-bold main-title mb-4">离散事件模拟</h3>
+                        <p class="mb-4">基于离散事件模拟机制，用轮询更新方式管理代理行为和事件调度，确保系统行为的同步和事件的有序安排，适合逐步推进的社会动态模拟场景。</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-2xl font-bold main-title mb-4">大型语言模型（LLMs）集成</h3>
+                        <p class="mb-4">与LLMs的集成，让代理生成自然语言文本，进行类似人类的决策和交流，增强模拟的真实性和复杂性。</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-2xl font-bold main-title mb-4">链式思维（CoT）</h3>
+                        <p class="mb-4">CoT机制支持代理进行多步推理，考虑多个因素后再做出决策，模拟战略行为如规划、谈判和联盟构建等。</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-2xl font-bold main-title mb-4">检索增强生成（RAG）</h3>
+                        <p class="mb-4">RAG记忆系统使代理能回忆过去的互动和决策，基于历史数据生成更细致和上下文相关的行为，模拟人类的长期战略思维和记忆依赖决策。</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm lg:col-span-2">
+                        <h3 class="text-2xl font-bold main-title mb-4">模块化架构</h3>
+                        <p class="mb-4">Casevo采用模块化设计，将模型设置、代理行为定义、并行优化和网络管理等功能划分为独立模块，实现系统的高度灵活性和可扩展性，便于根据具体需求进行定制和扩展。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operation Flow -->
+        <section id="operation" class="py-20 lg:py-32 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">操作流程</h2>
+                <p class="text-center text-lg section-title mb-16">使用Casevo进行模拟实验的完整步骤</p>
+                
+                <div class="max-w-4xl mx-auto">
+                    <!-- Step 1 -->
+                    <div class="mb-16">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4">1</div>
+                            <h3 class="text-2xl font-bold main-title">环境配置与安装</h3>
+                        </div>
+                        <div class="ml-16 space-y-4">
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">环境要求</h4>
+                                <p>确保拥有Python 3.11以上的运行环境。</p>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">项目安装</h4>
+                                <p class="mb-2">通过pip命令安装Casevo的whl包文件：</p>
+                                <pre>pip install casevo-0.3.12-py3-none-any.whl</pre>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">密钥配置</h4>
+                                <p>在代码中配置所使用的大语言模型服务的API密钥。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="mb-16">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4">2</div>
+                            <h3 class="text-2xl font-bold main-title">模拟场景构建</h3>
+                        </div>
+                        <div class="ml-16 space-y-4">
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">定义社会网络</h4>
+                                <p>使用networkx等库创建智能体之间的社会关系网络，并保存为JSON数据。</p>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">定义智能体画像</h4>
+                                <p>创建person.json文件，定义每个智能体的ID、初始观点、角色等属性。</p>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">生成主配置文件</h4>
+                                <p>将网络结构和智能体画像整合到主配置文件case_lite.json中，作为模拟的输入。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="mb-16">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4">3</div>
+                            <h3 class="text-2xl font-bold main-title">运行模拟与结果分析</h3>
+                        </div>
+                        <div class="ml-16 space-y-4">
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">编写运行脚本</h4>
+                                <p>编写run.py，用于加载配置文件、实例化模型并控制模拟的步进。</p>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">执行模拟</h4>
+                                <p class="mb-2">在命令行中运行脚本，并传入配置文件和模拟步数作为参数：</p>
+                                <pre>python run.py case_lite.json 6</pre>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg">
+                                <h4 class="font-bold text-lg mb-2">分析结果</h4>
+                                <p>模拟结果将输出到log文件夹中，包括agent_id.json, event.json和model.json等文件，记录了每个智能体的决策过程和全局事件，为研究者提供丰富的分析数据。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Features -->
+        <section id="important-features" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">重要特性</h2>
+                <p class="text-center text-lg section-title mb-16">Casevo的核心能力</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+                    <div>
+                        <h3 class="text-xl font-bold main-title mb-4">基于复杂网络构建多智能体系统</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li>通用化的大模型接口</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold main-title mb-4">自定义模型场景</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li>基于RAG的记忆模块</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold main-title mb-4">自定义Agent行为</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li>思维链模块支持多种交互</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold main-title mb-4">全自动基于场景的智能体人设生成</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li>基于基础人设库自动生成20+维度人设</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold main-title mb-4">基于社区发现和介数中心性的社交网络模拟优化</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li>全节点+轻节点组合的形式</li>
+                            <li>智能体算力请求并行化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Scenarios -->
+        <section id="applications" class="py-20 lg:py-32 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">应用场景</h2>
+                <p class="text-center text-lg section-title mb-16">Casevo的实际应用领域</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="card p-8 text-center">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold main-title mb-3">谣言传播</h3>
+                        <p>模拟谣言在社交网络中的传播路径和影响范围，为舆情管理提供决策支持。</p>
+                    </div>
+                    <div class="card p-8 text-center">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold main-title mb-3">政策效果</h3>
+                        <p>预测政策实施后的社会反应和影响，帮助政策制定者优化决策。</p>
+                    </div>
+                    <div class="card p-8 text-center">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold main-title mb-3">舆论推演</h3>
+                        <p>推演不同情境下舆论的发展趋势，为媒体和公关策略提供参考。</p>
+                    </div>
+                    <div class="card p-8 text-center">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold main-title mb-3">政治预测</h3>
+                        <p>模拟政治事件和选举过程，预测可能的结果和影响因素。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="py-20 lg:py-32 bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">开始使用Casevo</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">加入我们的开源社区，探索多智能体社会模拟的无限可能</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://github.com/rgCASS/casevo" target="_blank" class="btn-primary bg-white text-blue-600 font-bold py-3 px-8 rounded-lg inline-flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        访问GitHub仓库
+                    </a>
+                    <a href="index_bright.html#cooperation" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg inline-flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition">
+                        了解更多应用
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-8 border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; 2025 智能体与社会仿真实验室. All Rights Reserved.</p>
+            <p class="mt-2">地址：[实验室具体地址]</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="hover:text-blue-600">Twitter</a>
+                <a href="#" class="hover:text-blue-600">LinkedIn</a>
+                <a href="mailto:contact@agent-social-lab.org" class="hover:text-blue-600">联系我们</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Fade-in sections on scroll ---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
