@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>认知解码 - rgCASS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+    <style>
+        /* 复用现有项目 CSS 变量配色方案 */
+        :root {
+            --primary-blue: #0077ff;
+            --light-blue: #00aaff;
+            --text-primary: #212529;
+            --text-secondary: #5a6470;
+            --bg-light: #ffffff;
+            --bg-off-white: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-secondary);
+        }
+
+        /* 导航栏 */
+        .light-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 标题样式 */
+        .main-title {
+            color: var(--text-primary);
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px -2px rgb(0 0 0 / 0.05);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px -5px rgba(0, 119, 255, 0.15);
+            border-color: rgba(0, 119, 255, 0.3);
+        }
+
+        /* 点阵背景 */
+        .tech-bg {
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* 滚动淡入动画 */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 功能特性卡片 hover */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            background-color: rgba(0, 119, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 导航栏 -->
+    <header id="header" class="light-nav fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold main-title">
+                <a href="index.html">rgCASS</a>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-lg">
+                <a href="index.html" class="nav-link">网站首页</a>
+                <a href="index.html#research" class="nav-link">研究方向</a>
+                <a href="index.html#cooperation" class="nav-link">业务合作</a>
+                <a href="index.html#team" class="nav-link">团队构成</a>
+                <a href="index.html#recruitment" class="nav-link">联系我们</a>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">网站首页</a>
+            <a href="index.html#research" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">研究方向</a>
+            <a href="index.html#cooperation" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">业务合作</a>
+            <a href="index.html#team" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">团队构成</a>
+            <a href="index.html#recruitment" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">联系我们</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 第1屏：标题区 -->
+        <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-white pt-20">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold main-title leading-tight mb-6">认知解码</h1>
+                <div class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed">
+                    <p>通过挖掘线上行为、线下实验等多源异构数据，实现对人类认知与AI认知的双向解码，为类人智能体构建、模型风险评估和产品优化提供可解释的认知洞察。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第2屏：研究内容 -->
+        <section id="research-content" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">研究内容</h2>
+                <p class="text-center text-lg section-title mb-16">面向人类用户与AI模型构建统一的认知分析体系，通过多模态数据解析其认知结构、决策规律与偏好特征。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- 人类认知解码 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">人类认知解码</h3>
+                                <p>整合线上行为日志与线下实验数据，刻画用户认知结构、注意力分配与偏好模式，实现对人类决策规律的深度解析。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- AI认知解码 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">AI 认知解码</h3>
+                                <p>通过行为测试与可解释性分析方法，揭示大语言模型内部的认知模式、推理路径与潜在偏差，评估其认知能力边界。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 双向认知对比 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 3 21 3 21 8"></polyline>
+                                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                                    <polyline points="21 16 21 21 16 21"></polyline>
+                                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">双向认知对比</h3>
+                                <p>构建人类认知与 AI 认知的对比分析框架，量化两者在认知结构、推理策略与偏好特征上的异同，为类人智能体设计提供理论依据。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第3屏：主要功能 -->
+        <section id="functions" class="py-20 lg:py-32 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">主要功能</h2>
+                <p class="text-center text-lg section-title mb-16">整合"认知测绘—模型评测—风险诊断—策略建议"的全链路解决方案。</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- 认知测绘 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                                <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                                <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                                <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                                <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                                <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">认知测绘</h3>
+                        <p>基于多源数据构建用户与模型的认知图谱，全面刻画认知结构、知识边界与推理特征。</p>
+                    </div>
+                    <!-- 模型评测 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">模型评测</h3>
+                        <p>设计面向认知能力的标准化测评体系，量化评估大语言模型在推理、理解与决策方面的认知表现。</p>
+                    </div>
+                    <!-- 风险诊断 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">风险诊断</h3>
+                        <p>识别模型认知偏差与潜在风险点，输出可解释的诊断报告，支持模型对齐与安全性提升。</p>
+                    </div>
+                    <!-- 策略建议 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">策略建议</h3>
+                        <p>基于认知洞察输出针对性的优化建议，涵盖产品设计、内容策略与模型微调等多个维度。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第4屏：应用场景 -->
+        <section id="applications" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">应用场景</h2>
+                <p class="text-center text-lg section-title mb-16">深度嵌入以人类用户和AI模型认知洞察为前提条件的各类场景。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 类人智能体构建 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">类人智能体构建</h3>
+                        <p class="text-center">将人类认知图谱注入智能体设计，使其在行为决策和偏好表达上更贴近真实人类，支撑社会仿真与虚拟实验。</p>
+                    </div>
+                    <!-- 模型风险评估 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">模型风险评估</h3>
+                        <p class="text-center">面向大语言模型部署前的安全审查，量化认知偏差与幻觉风险，提供可解释的评测报告支撑决策。</p>
+                    </div>
+                    <!-- 产品优化 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">产品优化</h3>
+                        <p class="text-center">通过解析用户真实认知路径与决策偏好，指导 AI 产品的交互设计与功能迭代，提升用户体验与满意度。</p>
+                    </div>
+                    <!-- 教育与培训 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">教育与培训</h3>
+                        <p class="text-center">依托对学习者认知规律的精准刻画，为个性化学习系统和自适应教学平台提供认知科学支撑。</p>
+                    </div>
+                    <!-- 舆情与传播分析 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">舆情与传播分析</h3>
+                        <p class="text-center">结合认知解码结果模拟信息在社会网络中的扩散路径，辅助舆情研判与危机应对策略的制定。</p>
+                    </div>
+                    <!-- 人机协同 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">人机协同</h3>
+                        <p class="text-center">理解人类与 AI 在协作任务中的认知差异与互补性，优化人机交互界面设计与协同决策流程。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white py-8 border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; 2025-2026 智能体与社会仿真实验室. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 移动端菜单开合 ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 点击移动端菜单链接后自动收起
+        document.querySelectorAll('#mobile-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 滚动淡入动画（IntersectionObserver）---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
