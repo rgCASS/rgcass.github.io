@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PsyMem - 类人智能体 - rgCASS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+    <style>
+        /* 复用现有项目 CSS 变量配色方案 */
+        :root {
+            --primary-blue: #0077ff;
+            --light-blue: #00aaff;
+            --text-primary: #212529;
+            --text-secondary: #5a6470;
+            --bg-light: #ffffff;
+            --bg-off-white: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-secondary);
+        }
+
+        /* 导航栏 */
+        .light-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 标题样式 */
+        .main-title {
+            color: var(--text-primary);
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px -2px rgb(0 0 0 / 0.05);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px -5px rgba(0, 119, 255, 0.15);
+            border-color: rgba(0, 119, 255, 0.3);
+        }
+
+        /* 点阵背景 */
+        .tech-bg {
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* 滚动淡入动画 */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 功能特性卡片 hover */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            background-color: rgba(0, 119, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 导航栏 -->
+    <header id="header" class="light-nav fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold main-title">
+                <a href="index.html">rgCASS</a>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-lg">
+                <a href="index.html" class="nav-link">网站首页</a>
+                <a href="index.html#research" class="nav-link">研究方向</a>
+                <a href="index.html#cooperation" class="nav-link">业务合作</a>
+                <a href="index.html#team" class="nav-link">团队构成</a>
+                <a href="index.html#recruitment" class="nav-link">联系我们</a>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">网站首页</a>
+            <a href="index.html#research" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">研究方向</a>
+            <a href="index.html#cooperation" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">业务合作</a>
+            <a href="index.html#team" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">团队构成</a>
+            <a href="index.html#recruitment" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">联系我们</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 第1屏：标题区 -->
+        <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-white pt-20">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold main-title leading-tight mb-6">PsyMem - 类人智能体</h1>
+                <div class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed">
+                    <p>以认知科学为基础，构建具备人类认知特征的个性化智能体，实现更自然、更贴合人类思维模式的人机交互。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第2屏：研究内容 -->
+        <section id="research-content" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">研究内容</h2>
+                <p class="text-center text-lg section-title mb-16">融合记忆机制、认知偏差、情感建模等核心认知要素，让AI智能体拥有更接近人类的行为表现与交互体验。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- 记忆机制研究 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">记忆机制研究</h3>
+                                <p>构建分层记忆体系，模拟人类工作记忆、长期记忆与情景记忆的协同工作机制，使智能体具备持续积累与选择性遗忘的能力。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 认知偏差建模 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">认知偏差建模</h3>
+                                <p>系统化研究确认偏误、锚定效应、框架效应等人类认知偏差，将其融入智能体决策过程，实现更真实的类人行为特征。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 情感建模 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">情感建模</h3>
+                                <p>建立情感状态表示与动态演化模型，研究情感对认知与决策的影响机制，赋予智能体情感感知、表达与自适应调节的能力。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第3屏：主要特点 -->
+        <section id="features" class="py-20 lg:py-32 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">主要特点</h2>
+                <p class="text-center text-lg section-title mb-16">具备个性化记忆管理、认知一致性决策、情感感知与响应三大核心特性，支持持续进化。</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <!-- 个性化记忆管理 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">个性化记忆管理</h3>
+                        <p>动态维护用户专属记忆图谱，自动提取关键信息、合并相似记忆、遗忘低价值内容，实现随交互深度增长而不断丰富的个性化记忆体系。</p>
+                    </div>
+                    <!-- 认知一致性决策 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4"></polyline>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">认知一致性决策</h3>
+                        <p>基于智能体的认知状态、记忆积累与个性特征做出前后一致的决策，确保智能体在长期交互中表现出稳定的性格特征与行为风格。</p>
+                    </div>
+                    <!-- 情感感知与响应 -->
+                    <div class="card p-8 text-center">
+                        <div class="mb-6 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3">情感感知与响应</h3>
+                        <p>实时感知对话中的情感信号，结合自身情感状态动态调整回应策略，提供具有温度感的交互体验，支持智能体情感状态的自然流转与持续进化。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第4屏：应用场景 -->
+        <section id="applications" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">应用场景</h2>
+                <p class="text-center text-lg section-title mb-16">个人AI助理、虚拟伴侣、认知科学研究平台、人机交互体验测试。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- 个人AI助理 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">个人AI助理</h3>
+                        <p class="text-center">构建真正了解用户的个性化AI助理，通过持久记忆与认知建模，提供高度契合个人习惯、偏好与工作方式的智能辅助服务。</p>
+                    </div>
+                    <!-- 虚拟伴侣 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">虚拟伴侣</h3>
+                        <p class="text-center">打造具备持久记忆、情感联结与成长轨迹的虚拟伴侣，为用户提供陪伴、倾听与情感支持，探索人与AI深度情感交互的新形态。</p>
+                    </div>
+                    <!-- 认知科学研究平台 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">认知科学研究平台</h3>
+                        <p class="text-center">为认知科学研究者提供可控的智能体仿真实验环境，支持认知理论验证、行为数据采集与跨文化认知差异比较研究。</p>
+                    </div>
+                    <!-- 人机交互体验测试 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">人机交互体验测试</h3>
+                        <p class="text-center">利用类人智能体模拟真实用户群体，在产品发布前开展大规模交互测试，快速迭代优化人机交互设计，降低用研成本。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white py-8 border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; 2025-2026 智能体与社会仿真实验室. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 移动端菜单开合 ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 点击移动端菜单链接后自动收起
+        document.querySelectorAll('#mobile-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 滚动淡入动画（IntersectionObserver）---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
