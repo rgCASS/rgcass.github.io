@@ -140,20 +140,46 @@
         <!-- 第1屏：标题区 -->
         <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-white pt-20">
             <div class="container mx-auto px-6 py-16 text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold main-title leading-tight mb-6">PsyMem - 类人智能体</h1>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold main-title leading-tight mb-6">PsyMem</h1>
                 <div class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed">
-                    <p>以认知科学为基础，构建具备人类认知特征的个性化智能体，实现更自然、更贴合人类思维模式的人机交互。</p>
+                    <p>通过细粒度心理画像和显式记忆控制，为高级角色扮演大语言模型构建精确的认知锚点。</p>
+                </div>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://github.com/rgCASS/PsyMem" target="_blank" class="btn-primary font-bold py-3 px-8 rounded-lg inline-flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        Github开源
+                    </a>
+                    <a href="#" class="bg-transparent border-2 border-blue-600 text-blue-600 font-bold py-3 px-8 rounded-lg inline-flex items-center justify-center hover:bg-blue-50 transition">
+                        了解更多
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- 第2屏：研究内容 -->
+        <!-- 第2屏：核心特点 -->
         <section id="research-content" class="py-20 lg:py-32 fade-in-section tech-bg">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">研究内容</h2>
-                <p class="text-center text-lg section-title mb-16">融合记忆机制、认知偏差、情感建模等核心认知要素，让AI智能体拥有更接近人类的行为表现与交互体验。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- 记忆机制研究 -->
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">核心特点</h2>
+                <p class="text-center text-lg section-title mb-16">用于生成和分析模拟社会行为的生成式研究工具</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 细粒度心理画像 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold main-title mb-2">细粒度心理画像</h3>
+                                <p>通过26个可量化的心理指标，涵盖个性(Big Five)、价值观(Schwartz)以及显式行为模式，精确建模角色的内在动机和外在表现。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 显式记忆控制 -->
                     <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
                         <div class="flex items-start mb-4">
                             <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
@@ -164,38 +190,38 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold main-title mb-2">记忆机制研究</h3>
-                                <p>构建分层记忆体系，模拟人类工作记忆、长期记忆与情景记忆的协同工作机制，使智能体具备持续积累与选择性遗忘的能力。</p>
+                                <h3 class="text-xl font-bold main-title mb-2">显式记忆控制</h3>
+                                <p>引入记忆对齐训练范式，建立角色扮演响应与角色记忆之间的显式认知锚定，确保模型严格基于检索到的记忆生成回应，解决现有模型记忆幻觉和角色崩坏的问题。</p>
                             </div>
                         </div>
                     </div>
-                    <!-- 认知偏差建模 -->
+                    <!-- 记忆对齐训练 -->
                     <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
                         <div class="flex items-start mb-4">
                             <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                    <polyline points="9 11 12 14 22 4"></polyline>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold main-title mb-2">认知偏差建模</h3>
-                                <p>系统化研究确认偏误、锚定效应、框架效应等人类认知偏差，将其融入智能体决策过程，实现更真实的类人行为特征。</p>
+                                <h3 class="text-xl font-bold main-title mb-2">记忆对齐训练</h3>
+                                <p>通过双重控制机制(属性维度和情景记忆约束)，增强角色扮演的一致性，解决现有模型记忆幻觉和角色崩坏的问题。</p>
                             </div>
                         </div>
                     </div>
-                    <!-- 情感建模 -->
+                    <!-- 大规模数据集 -->
                     <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
                         <div class="flex items-start mb-4">
                             <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold main-title mb-2">情感建模</h3>
-                                <p>建立情感状态表示与动态演化模型，研究情感对认知与决策的影响机制，赋予智能体情感感知、表达与自适应调节的能力。</p>
+                                <h3 class="text-xl font-bold main-title mb-2">大规模数据集</h3>
+                                <p>构建了包含5,414个角色、38,962场对话和536,636条语料的大规模数据集，来源于539部不同题材的小说，支持全方位的角色模拟。</p>
                             </div>
                         </div>
                     </div>
@@ -203,61 +229,57 @@
             </div>
         </section>
 
-        <!-- 第3屏：主要特点 -->
-        <section id="features" class="py-20 lg:py-32 bg-white fade-in-section">
+        <!-- 第3屏：技术原理 -->
+        <section id="principles" class="py-20 lg:py-32 bg-white fade-in-section">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">主要特点</h2>
-                <p class="text-center text-lg section-title mb-16">具备个性化记忆管理、认知一致性决策、情感感知与响应三大核心特性，支持持续进化。</p>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                    <!-- 个性化记忆管理 -->
-                    <div class="card p-8 text-center">
-                        <div class="mb-6 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold main-title mb-3">个性化记忆管理</h3>
-                        <p>动态维护用户专属记忆图谱，自动提取关键信息、合并相似记忆、遗忘低价值内容，实现随交互深度增长而不断丰富的个性化记忆体系。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">技术原理</h2>
+                <p class="text-center text-lg section-title mb-16">深入了解PsyMem的核心架构</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- 潜在心理属性建模 -->
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                        <h3 class="text-2xl font-bold main-title mb-4">潜在心理属性建模</h3>
+                        <p class="mb-4">利用现代心理学框架（Big Five, Schwartz Values）将角色内在属性量化，指导角色的动机、偏好和情感反应，是角色行为的深层驱动力。</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm pl-2">
+                            <li>Personality：Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism</li>
+                            <li>Values：Self-direction, Stimulation, Hedonism, Achievement, Power等</li>
+                        </ul>
                     </div>
-                    <!-- 认知一致性决策 -->
-                    <div class="card p-8 text-center">
-                        <div class="mb-6 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 11 12 14 22 4"></polyline>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold main-title mb-3">认知一致性决策</h3>
-                        <p>基于智能体的认知状态、记忆积累与个性特征做出前后一致的决策，确保智能体在长期交互中表现出稳定的性格特征与行为风格。</p>
+                    <!-- 显式行为模式分析 -->
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                        <h3 class="text-2xl font-bold main-title mb-4">显式行为模式分析</h3>
+                        <p class="mb-4">捕捉角色在社交互动、领导风格和冲突解决中的外在表现。</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm pl-2">
+                            <li>Social&amp;Leadership：基于Zimbardo心理学原则的6个维度</li>
+                            <li>Behavioral Decision：使用Thomas-Kilmann冲突模式工具（TKI）分析</li>
+                        </ul>
                     </div>
-                    <!-- 情感感知与响应 -->
-                    <div class="card p-8 text-center">
-                        <div class="mb-6 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold main-title mb-3">情感感知与响应</h3>
-                        <p>实时感知对话中的情感信号，结合自身情感状态动态调整回应策略，提供具有温度感的交互体验，支持智能体情感状态的自然流转与持续进化。</p>
+                    <!-- 记忆整合机制 -->
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 lg:col-span-2">
+                        <h3 class="text-2xl font-bold main-title mb-4">记忆整合机制</h3>
+                        <p>受海马体和认知映射机制启发，将角色、事件和关系转化为知识图谱；构建基于图的检索增强生成（GraphRAG），精准定位相关记忆；通过属性维度与情景记忆的Dual-Control共同约束生成过程。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 第4屏：应用场景 -->
+        <!-- 第4屏：实验结果 -->
+        <section id="results" class="py-20 lg:py-32 fade-in-section tech-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">实验结果</h2>
+                <p class="text-center text-lg section-title mb-16">PsyMem-Qwen 在多项指标上表现优异</p>
+                <div class="max-w-3xl mx-auto bg-white rounded-xl p-10 shadow-sm border border-gray-100 text-center">
+                    <p class="text-lg leading-relaxed">展示PsyMem-Qwen实验结果柱状图，PsyMem-Qwen 在多项指标上表现优异，呈现模型在 <strong>Value、Social &amp; Leadership、Behavioral Decision、Human-Likeness</strong> 四项均获得 Top 1 表现。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第5屏：应用场景 -->
         <section id="applications" class="py-20 lg:py-32 fade-in-section tech-bg">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">应用场景</h2>
-                <p class="text-center text-lg section-title mb-16">个人AI助理、虚拟伴侣、认知科学研究平台、人机交互体验测试。</p>
+                <p class="text-center text-lg section-title mb-16">深度嵌入人类认知和行为仿真和智能交互的各类虚实场景。</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- 个人AI助理 -->
+                    <!-- 人物分析 -->
                     <div class="card p-8">
                         <div class="mb-4 flex justify-center text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -265,31 +287,20 @@
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">个人AI助理</h3>
-                        <p class="text-center">构建真正了解用户的个性化AI助理，通过持久记忆与认知建模，提供高度契合个人习惯、偏好与工作方式的智能辅助服务。</p>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">人物分析</h3>
+                        <p class="text-center">模拟具有特定社会属性、人格、记忆等特征的关键人物，分析其对信息或事件的观点和态度。</p>
                     </div>
-                    <!-- 虚拟伴侣 -->
+                    <!-- 社交机器人 -->
                     <div class="card p-8">
                         <div class="mb-4 flex justify-center text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">虚拟伴侣</h3>
-                        <p class="text-center">打造具备持久记忆、情感联结与成长轨迹的虚拟伴侣，为用户提供陪伴、倾听与情感支持，探索人与AI深度情感交互的新形态。</p>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">社交机器人</h3>
+                        <p class="text-center">创造高质量社交机器人，模拟社交媒体用户特点和行为，代替用户自动化完成特定任务。</p>
                     </div>
-                    <!-- 认知科学研究平台 -->
-                    <div class="card p-8">
-                        <div class="mb-4 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">认知科学研究平台</h3>
-                        <p class="text-center">为认知科学研究者提供可控的智能体仿真实验环境，支持认知理论验证、行为数据采集与跨文化认知差异比较研究。</p>
-                    </div>
-                    <!-- 人机交互体验测试 -->
+                    <!-- 互动体验 -->
                     <div class="card p-8">
                         <div class="mb-4 flex justify-center text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -298,8 +309,22 @@
                                 <line x1="12" y1="17" x2="12" y2="21"></line>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">人机交互体验测试</h3>
-                        <p class="text-center">利用类人智能体模拟真实用户群体，在产品发布前开展大规模交互测试，快速迭代优化人机交互设计，降低用研成本。</p>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">互动体验</h3>
+                        <p class="text-center">通过与 AI 扮演的角色交互，如难缠客户、强势谈判者、生活伴侣等，实现沉浸式体验和技能点提升。</p>
+                    </div>
+                    <!-- AI 社区 -->
+                    <div class="card p-8">
+                        <div class="mb-4 flex justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">AI 社区</h3>
+                        <p class="text-center">创建成千上万个拥有不同价值观和性格组合的 AI 智能体，观察它们在虚拟社区中社会互动及群体现象涌现。</p>
                     </div>
                 </div>
             </div>

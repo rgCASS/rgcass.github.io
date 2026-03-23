@@ -152,8 +152,8 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">研究内容</h2>
                 <p class="text-center text-lg section-title mb-16">面向人类用户与AI模型构建统一的认知分析体系，通过多模态数据解析其认知结构、决策规律与偏好特征。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- 人类认知解码 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 人类认知建模 -->
                     <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
                         <div class="flex items-start mb-4">
                             <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
@@ -165,12 +165,16 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold main-title mb-2">人类认知解码</h3>
-                                <p>整合线上行为日志与线下实验数据，刻画用户认知结构、注意力分配与偏好模式，实现对人类决策规律的深度解析。</p>
+                                <h3 class="text-xl font-bold main-title mb-2">人类认知建模</h3>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>融合线上社交互动数据(点击、转发评论等)与线下认知实验数据(眼动、EEG、生理反应等)</li>
+                                    <li>多维刻画感知、注意、记忆、情绪、价值观及决策偏好结构</li>
+                                    <li>支持对不同文化、年龄、场景的认知差异分析</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- AI认知解码 -->
+                    <!-- 大模型认知解析 -->
                     <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
                         <div class="flex items-start mb-4">
                             <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
@@ -181,12 +185,16 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold main-title mb-2">AI 认知解码</h3>
-                                <p>通过行为测试与可解释性分析方法，揭示大语言模型内部的认知模式、推理路径与潜在偏差，评估其认知能力边界。</p>
+                                <h3 class="text-xl font-bold main-title mb-2">大模型认知解析</h3>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>解析大模型的知识结构、推理策略、偏见来源、价值倾向</li>
+                                    <li>评估大模型的记忆一致性、决策路径稳定性</li>
+                                    <li>拆解"黑箱模型"，探索结构化认知表征，强化可解释性</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- 双向认知对比 -->
+                    <!-- 人机双向对齐剖析 -->
                     <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white">
                         <div class="flex items-start mb-4">
                             <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4 flex-shrink-0">
@@ -199,9 +207,19 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold main-title mb-2">双向认知对比</h3>
-                                <p>构建人类认知与 AI 认知的对比分析框架，量化两者在认知结构、推理策略与偏好特征上的异同，为类人智能体设计提供理论依据。</p>
+                                <h3 class="text-xl font-bold main-title mb-2">人机双向对齐剖析</h3>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>人类与模型认知对比：相似性、差异性</li>
+                                    <li>拟人化智能体评估分析</li>
+                                    <li>人机交互失配风险挖掘</li>
+                                </ul>
                             </div>
+                        </div>
+                    </div>
+                    <!-- 预留区块 -->
+                    <div class="feature-card p-8 rounded-lg border border-gray-100 bg-white opacity-50">
+                        <div class="flex items-center justify-center h-full">
+                            <p class="text-gray-400 text-center">(预留区块)</p>
                         </div>
                     </div>
                 </div>
@@ -228,7 +246,11 @@
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold main-title mb-3">认知测绘</h3>
-                        <p>基于多源数据构建用户与模型的认知图谱，全面刻画认知结构、知识边界与推理特征。</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-left">
+                            <li>融合文本、音频、视频、行为序列、生理信号等模态</li>
+                            <li>自动构建用户的认知画像：兴趣、价值观、文化图式、情绪敏感性等</li>
+                            <li>快速发现认知模式、注意分布、信息加工路径</li>
+                        </ul>
                     </div>
                     <!-- 模型评测 -->
                     <div class="card p-8 text-center">
@@ -238,7 +260,11 @@
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold main-title mb-3">模型评测</h3>
-                        <p>设计面向认知能力的标准化测评体系，量化评估大语言模型在推理、理解与决策方面的认知表现。</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-left">
+                            <li>能力测评：理解、推理、记忆、生成、检索、多模态处理等维度</li>
+                            <li>个性与偏见分析：价值观偏移、性别/年龄偏见、文化偏差等</li>
+                            <li>决策链路解析：思维链、错误模式、策略倾向、幻觉触发条件</li>
+                        </ul>
                     </div>
                     <!-- 风险诊断 -->
                     <div class="card p-8 text-center">
@@ -250,7 +276,10 @@
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold main-title mb-3">风险诊断</h3>
-                        <p>识别模型认知偏差与潜在风险点，输出可解释的诊断报告，支持模型对齐与安全性提升。</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-left">
+                            <li>对人类用户：识别风险认知(误解、恐惧、偏见、认知盲点)</li>
+                            <li>对大模型：识别潜在风险(幻觉、高风险偏见、逻辑崩坏点、角色一致性失效)</li>
+                        </ul>
                     </div>
                     <!-- 策略建议 -->
                     <div class="card p-8 text-center">
@@ -260,8 +289,12 @@
                                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3">策略建议</h3>
-                        <p>基于认知洞察输出针对性的优化建议，涵盖产品设计、内容策略与模型微调等多个维度。</p>
+                        <h3 class="text-xl font-bold main-title mb-3">策略优化</h3>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-left">
+                            <li>模型调参建议</li>
+                            <li>内容生成建议</li>
+                            <li>调控策略建议</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -271,31 +304,32 @@
         <section id="applications" class="py-20 lg:py-32 fade-in-section tech-bg">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 main-title">应用场景</h2>
-                <p class="text-center text-lg section-title mb-16">深度嵌入以人类用户和AI模型认知洞察为前提条件的各类场景。</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- 类人智能体构建 -->
+                <p class="text-center text-lg section-title mb-16">深度嵌入以人类用户和 AI 模型认知洞察为前提条件的各类场景</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 用户研究 -->
                     <div class="card p-8">
                         <div class="mb-4 flex justify-center text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">类人智能体构建</h3>
-                        <p class="text-center">将人类认知图谱注入智能体设计，使其在行为决策和偏好表达上更贴近真实人类，支撑社会仿真与虚拟实验。</p>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">用户研究</h3>
+                        <p class="text-center">提供可解释的多维度认知洞察，支撑快速低成本深度用户研究</p>
                     </div>
-                    <!-- 模型风险评估 -->
+                    <!-- 模型调优 -->
                     <div class="card p-8">
                         <div class="mb-4 flex justify-center text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">模型风险评估</h3>
-                        <p class="text-center">面向大语言模型部署前的安全审查，量化认知偏差与幻觉风险，提供可解释的评测报告支撑决策。</p>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">模型调优</h3>
+                        <p class="text-center">提供全面的模型认知漏洞扫描，指导模型持续训练优化</p>
                     </div>
-                    <!-- 产品优化 -->
+                    <!-- 产品设计 -->
                     <div class="card p-8">
                         <div class="mb-4 flex justify-center text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -306,42 +340,14 @@
                                 <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">产品优化</h3>
-                        <p class="text-center">通过解析用户真实认知路径与决策偏好，指导 AI 产品的交互设计与功能迭代，提升用户体验与满意度。</p>
+                        <h3 class="text-xl font-bold main-title mb-3 text-center">产品设计</h3>
+                        <p class="text-center">提供人机价值对齐依据，优化医疗、教育、客服等专业 AI 设计</p>
                     </div>
-                    <!-- 教育与培训 -->
-                    <div class="card p-8">
-                        <div class="mb-4 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                            </svg>
+                    <!-- 预留区块 -->
+                    <div class="card p-8 opacity-50">
+                        <div class="flex items-center justify-center h-full min-h-32">
+                            <p class="text-gray-400 text-center">(预留区块)</p>
                         </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">教育与培训</h3>
-                        <p class="text-center">依托对学习者认知规律的精准刻画，为个性化学习系统和自适应教学平台提供认知科学支撑。</p>
-                    </div>
-                    <!-- 舆情与传播分析 -->
-                    <div class="card p-8">
-                        <div class="mb-4 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">舆情与传播分析</h3>
-                        <p class="text-center">结合认知解码结果模拟信息在社会网络中的扩散路径，辅助舆情研判与危机应对策略的制定。</p>
-                    </div>
-                    <!-- 人机协同 -->
-                    <div class="card p-8">
-                        <div class="mb-4 flex justify-center text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold main-title mb-3 text-center">人机协同</h3>
-                        <p class="text-center">理解人类与 AI 在协作任务中的认知差异与互补性，优化人机交互界面设计与协同决策流程。</p>
                     </div>
                 </div>
             </div>
