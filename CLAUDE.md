@@ -7,6 +7,7 @@
 | v1.0 | 2026-03-22 | 初始化 AI 上下文，生成根级与模块级 CLAUDE.md，创建 .claude/index.json |
 | v1.1 | 2026-03-23 | B005: 新增 psymem.html 类人智能体专题页，更新模块索引 |
 | v1.2 | 2026-03-23 | 建立主页与认知解码、类人智能体专题页的双向链接 |
+| v1.3 | 2026-03-23 | B007: 新增 cognitive-shaping.html 认知塑造专题页，更新首页认知塑造卡片跳转链接 |
 
 ---
 
@@ -70,6 +71,7 @@ graph TD
 | Casevo 专题页 | `casevo.html` | HTML/CSS/JS | Casevo 多智能体模拟器产品介绍页，含特性、原理、操作流程 | [CLAUDE.md](./pages/casevo/CLAUDE.md) |
 | 认知解码专题页 | `cognitive-decoding.html` | HTML/CSS/JS | 认知解码研究方向专题页，含研究内容、主要功能、应用场景 | — |
 | 类人智能体专题页 | `psymem.html` | HTML/CSS/JS | PsyMem 类人智能体研究方向专题页，含研究内容、主要特点、应用场景 | — |
+| 认知塑造专题页 | `cognitive-shaping.html` | HTML/CSS/JS | 认知塑造研究方向专题页，含标题区、研究内容、应用场景 | — |
 | 规范工作流 | `.spec-workflow/` | Markdown | AI 辅助规范文档流程（需求/设计/任务模板），不影响网站运行 | [CLAUDE.md](./.spec-workflow/CLAUDE.md) |
 
 > **待规划模块**（当前分支 `feature/B004-cognitive-decoding` 曾添加后已 revert）：
