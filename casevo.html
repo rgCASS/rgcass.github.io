@@ -52,6 +52,9 @@
         .nav-link:hover::after {
             width: 100%;
         }
+        .nav-link.active::after {
+            width: 100%;
+        }
 
         .main-title {
             color: var(--text-primary);
@@ -135,13 +138,14 @@
     <header id="header" class="light-nav fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold main-title">
-                <a href="index_bright.html">rgCASS</a>
+                <a href="index.html">rgCASS</a>
             </div>
             <nav class="hidden md:flex space-x-8 text-lg">
-                <a href="index_bright.html#research" class="nav-link">研究方向</a>
-                <a href="index_bright.html#cooperation" class="nav-link">业务合作</a>
-                <a href="index_bright.html#team" class="nav-link">团队构成</a>
-                <a href="index_bright.html#recruitment" class="nav-link">联系我们</a>
+                <a href="index.html" class="nav-link">网站首页</a>
+                <a href="index.html#research" class="nav-link active">研究方向</a>
+                <a href="index.html#cooperation" class="nav-link">业务合作</a>
+                <a href="index.html#team" class="nav-link">团队构成</a>
+                <a href="index.html#recruitment" class="nav-link">联系我们</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -149,10 +153,11 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <a href="index_bright.html#research" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">研究方向</a>
-            <a href="index_bright.html#cooperation" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">业务合作</a>
-            <a href="index_bright.html#team" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">团队构成</a>
-            <a href="index_bright.html#recruitment" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">联系我们</a>
+            <a href="index.html" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">网站首页</a>
+            <a href="index.html#research" class="block py-3 px-6 text-lg nav-link active hover:bg-gray-50">研究方向</a>
+            <a href="index.html#cooperation" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">业务合作</a>
+            <a href="index.html#team" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">团队构成</a>
+            <a href="index.html#recruitment" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">联系我们</a>
         </div>
     </header>
 
@@ -438,7 +443,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                         访问GitHub仓库
                     </a>
-                    <a href="index_bright.html#cooperation" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg inline-flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition">
+                    <a href="index.html#cooperation" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg inline-flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition">
                         了解更多应用
                     </a>
                 </div>

@@ -53,6 +53,9 @@
         .nav-link:hover::after {
             width: 100%;
         }
+        .nav-link.active::after {
+            width: 100%;
+        }
 
         /* 标题样式 */
         .main-title {
@@ -114,7 +117,7 @@
             </div>
             <nav class="hidden md:flex space-x-8 text-lg">
                 <a href="index.html" class="nav-link">网站首页</a>
-                <a href="index.html#research" class="nav-link">研究方向</a>
+                <a href="index.html#research" class="nav-link active">研究方向</a>
                 <a href="index.html#cooperation" class="nav-link">业务合作</a>
                 <a href="index.html#team" class="nav-link">团队构成</a>
                 <a href="index.html#recruitment" class="nav-link">联系我们</a>
@@ -129,7 +132,7 @@
         <!-- 移动端菜单 -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
             <a href="index.html" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">网站首页</a>
-            <a href="index.html#research" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">研究方向</a>
+            <a href="index.html#research" class="block py-3 px-6 text-lg nav-link active hover:bg-gray-50">研究方向</a>
             <a href="index.html#cooperation" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">业务合作</a>
             <a href="index.html#team" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">团队构成</a>
             <a href="index.html#recruitment" class="block py-3 px-6 text-lg nav-link hover:bg-gray-50">联系我们</a>

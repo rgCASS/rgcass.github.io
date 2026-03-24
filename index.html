@@ -52,6 +52,9 @@
         .nav-link:hover::after {
             width: 100%;
         }
+        .nav-link.active::after {
+            width: 100%;
+        }
 
         .main-title {
             color: var(--text-primary);
@@ -313,7 +316,7 @@
     <!-- Footer -->
     <footer class="bg-white py-8 border-t border-gray-200">
         <div class="container mx-auto px-6 text-center text-gray-600">
-            <p>&copy; 2025 智能体与社会仿真实验室. All Rights Reserved.</p>
+            <p>&copy; 2025-2026 智能体与社会仿真实验室. All Rights Reserved.</p>
             <p class="mt-2">地址：[实验室具体地址]</p>
             <div class="mt-4 flex justify-center space-x-6">
                 <a href="#" class="hover:text-blue-600">Twitter</a>
@@ -438,6 +441,31 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // --- Navigation Active State ---
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sectionElements = document.querySelectorAll('section[id]');
+
+        function updateActiveNav() {
+            let current = 'hero';
+            sectionElements.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
 
     </script>
 </body>
